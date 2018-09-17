@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="0c0499b2016e42ccbf3e1b9ef5aa3d18" Name="Diagram1">
+        <EntityTypeShape EntityType="DAWModel.Actions" Width="1.5" PointX="5.5" PointY="1" />
+        <EntityTypeShape EntityType="DAWModel.Department" Width="1.5" PointX="3" PointY="4.25" />
+        <EntityTypeShape EntityType="DAWModel.Document" Width="1.5" PointX="3.125" PointY="6.625" />
+        <EntityTypeShape EntityType="DAWModel.DocumentStatus" Width="1.5" PointX="0.5" PointY="7" />
+        <EntityTypeShape EntityType="DAWModel.DocumentType" Width="1.5" PointX="0.875" PointY="3.875" />
+        <EntityTypeShape EntityType="DAWModel.Log" Width="1.5" PointX="5.25" PointY="3.375" />
+        <EntityTypeShape EntityType="DAWModel.User" Width="1.5" PointX="5.5" PointY="6.375" />
+        <EntityTypeShape EntityType="DAWModel.Workflow" Width="1.5" PointX="3.125" PointY="1" />
+        <EntityTypeShape EntityType="DAWModel.WorkflowGroup" Width="1.5" PointX="0.875" PointY="1" />
+        <AssociationConnector Association="DAWModel.FK_User_Department" />
+        <AssociationConnector Association="DAWModel.FK_Document_DocumentStatus" />
+        <AssociationConnector Association="DAWModel.FK_Document_DocumentType" ManuallyRouted="true" >
+          <ConnectorPoint PointX="2.21875" PointY="6.047587890624996" />
+          <ConnectorPoint PointX="2.21875" PointY="9.2110400390625014" />
+          <ConnectorPoint PointX="3.026309375" PointY="9.2110400390625014" />
+          <ConnectorPoint PointX="3.026309375" PointY="9.3047900390625" />
+          <ConnectorPoint PointX="3.125" PointY="9.3047900390625" />
+        </AssociationConnector>
+        <AssociationConnector Association="DAWModel.FK_Document_User" />
+        <AssociationConnector Association="DAWModel.FK_DocumentType_WorkflowGroup" />
+        <AssociationConnector Association="DAWModel.FK_Log_User" />
+        <AssociationConnector Association="DAWModel.FK_Log_Actions" />
+        <AssociationConnector Association="DAWModel.FK_Workflow_Department" />
+        <AssociationConnector Association="DAWModel.FK_Workflow_WorkflowGroup" />
+        <AssociationConnector Association="DAWModel.FK_Workflow_Actions" />
+        <EntityTypeShape EntityType="DAWModel.ViewUserDpm" Width="1.5" PointX="8.375" PointY="0.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
