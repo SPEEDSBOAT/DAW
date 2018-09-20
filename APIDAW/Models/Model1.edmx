@@ -97,6 +97,19 @@
           <Property Name="NameEN" Type="varchar" MaxLength="50" />
         </EntityType>
         <!--Errors Found During Generation:
+warning 6002: The table/view 'DAW.dbo.ViewDocTypeWorkGroup' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ViewDocTypeWorkGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="NameTH" Type="varchar" MaxLength="50" />
+          <Property Name="NameEN" Type="varchar" MaxLength="50" />
+          <Property Name="WorkflowGroupId" Type="int" />
+          <Property Name="NameTH_wfg" Type="varchar" MaxLength="50" />
+          <Property Name="NameEN_wfg" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <!--Errors Found During Generation:
 warning 6002: The table/view 'DAW.dbo.ViewUserDpm' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="ViewUserDpm">
           <Key>
@@ -247,6 +260,16 @@ warning 6002: The table/view 'DAW.dbo.ViewUserDpm' does not have a primary key d
           <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Workflow" EntityType="Self.Workflow" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="WorkflowGroup" EntityType="Self.WorkflowGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ViewDocTypeWorkGroup" EntityType="Self.ViewDocTypeWorkGroup" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ViewDocTypeWorkGroup].[Id] AS [Id], 
+    [ViewDocTypeWorkGroup].[NameTH] AS [NameTH], 
+    [ViewDocTypeWorkGroup].[NameEN] AS [NameEN], 
+    [ViewDocTypeWorkGroup].[WorkflowGroupId] AS [WorkflowGroupId], 
+    [ViewDocTypeWorkGroup].[NameTH_wfg] AS [NameTH_wfg], 
+    [ViewDocTypeWorkGroup].[NameEN_wfg] AS [NameEN_wfg]
+    FROM [dbo].[ViewDocTypeWorkGroup] AS [ViewDocTypeWorkGroup]</DefiningQuery>
+          </EntitySet>
           <EntitySet Name="ViewUserDpm" EntityType="Self.ViewUserDpm" store:Type="Views" store:Schema="dbo">
             <DefiningQuery>SELECT 
     [ViewUserDpm].[Id] AS [Id], 
@@ -360,6 +383,7 @@ warning 6002: The table/view 'DAW.dbo.ViewUserDpm' does not have a primary key d
             <End Role="Workflow" EntitySet="Workflow" />
           </AssociationSet>
           <EntitySet Name="ViewUserDpm" EntityType="DAWModel.ViewUserDpm" />
+          <EntitySet Name="ViewDocTypeWorkGroup" EntityType="DAWModel.ViewDocTypeWorkGroup" />
         </EntityContainer>
         <EntityType Name="Actions">
           <Key>
@@ -611,6 +635,17 @@ warning 6002: The table/view 'DAW.dbo.ViewUserDpm' does not have a primary key d
           <Property Name="NameTH_Dpm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="NameEN_Dpm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
+        <EntityType Name="ViewDocTypeWorkGroup">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="NameTH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NameEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="WorkflowGroupId" Type="Int32" />
+          <Property Name="NameTH_wfg" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="NameEN_wfg" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -732,6 +767,18 @@ warning 6002: The table/view 'DAW.dbo.ViewUserDpm' does not have a primary key d
                 <ScalarProperty Name="LastNameTH" ColumnName="LastNameTH" />
                 <ScalarProperty Name="NameTH" ColumnName="NameTH" />
                 <ScalarProperty Name="DepartmentId" ColumnName="DepartmentId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ViewDocTypeWorkGroup">
+            <EntityTypeMapping TypeName="DAWModel.ViewDocTypeWorkGroup">
+              <MappingFragment StoreEntitySet="ViewDocTypeWorkGroup">
+                <ScalarProperty Name="NameEN_wfg" ColumnName="NameEN_wfg" />
+                <ScalarProperty Name="NameTH_wfg" ColumnName="NameTH_wfg" />
+                <ScalarProperty Name="WorkflowGroupId" ColumnName="WorkflowGroupId" />
+                <ScalarProperty Name="NameEN" ColumnName="NameEN" />
+                <ScalarProperty Name="NameTH" ColumnName="NameTH" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>

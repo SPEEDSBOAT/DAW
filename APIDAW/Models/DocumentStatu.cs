@@ -12,13 +12,12 @@ namespace APIDAW.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Department
+    public partial class DocumentStatu
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Department()
+        public DocumentStatu()
         {
-            this.User = new HashSet<User>();
-            this.Workflow = new HashSet<Workflow>();
+            this.Documents = new HashSet<Document>();
         }
     
         public int Id { get; set; }
@@ -26,8 +25,6 @@ namespace APIDAW.Models
         public string NameEN { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<User> User { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Workflow> Workflow { get; set; }
+        public virtual ICollection<Document> Documents { get; set; }
     }
 }

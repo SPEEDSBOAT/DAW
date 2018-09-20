@@ -35,5 +35,6 @@ namespace APIDAW.Models
         public virtual DbSet<Workflow> Workflow { get; set; }
         public virtual DbSet<WorkflowGroup> WorkflowGroup { get; set; }
         public virtual DbSet<ViewUserDpm> ViewUserDpm { get; set; }
+        public virtual DbSet<ViewDocTypeWorkGroup> ViewDocTypeWorkGroup { get; set; }
     }
 }

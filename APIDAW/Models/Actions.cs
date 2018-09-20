@@ -18,7 +18,7 @@ namespace APIDAW.Models
         public Actions()
         {
             this.Log = new HashSet<Log>();
-            
+            this.Workflow = new HashSet<Workflow>();
         }
     
         public int Id { get; set; }
@@ -28,6 +28,6 @@ namespace APIDAW.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Log> Log { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual Workflow Workflow { get; set; }
+        public virtual ICollection<Workflow> Workflow { get; set; }
     }
 }
