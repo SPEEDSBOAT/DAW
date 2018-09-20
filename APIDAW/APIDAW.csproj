@@ -194,6 +194,7 @@
     <Compile Include="Controllers\ApiDocumentStatusController.cs" />
     <Compile Include="Controllers\ApiDocumentTypeController.cs" />
     <Compile Include="Controllers\ApiUserController.cs" />
+    <Compile Include="Controllers\ApiViewDocTypeWorkGroupController.cs" />
     <Compile Include="Controllers\ApiViewUserDpmController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -236,6 +237,9 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\ViewApiModel.cs" />
+    <Compile Include="Models\ViewDocTypeWorkGroup.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ViewUserDpm.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
@@ -324,6 +328,7 @@
     <Folder Include="Views\ApiDocumentStatus\" />
     <Folder Include="Views\ApiDocumentType\" />
     <Folder Include="Views\ApiUser\" />
+    <Folder Include="Views\ApiViewDocTypeWorkGroup\" />
     <Folder Include="Views\ApiViewUserDpm\" />
   </ItemGroup>
   <ItemGroup>

@@ -17,7 +17,8 @@ namespace APIDAW.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Department()
         {
-            
+            this.User = new HashSet<User>();
+            this.Workflow = new HashSet<Workflow>();
         }
     
         public int Id { get; set; }
@@ -25,8 +26,8 @@ namespace APIDAW.Models
         public string NameEN { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual User User { get; set; }
+        public virtual ICollection<User> User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual Workflow Workflow { get; set; }
+        public virtual ICollection<Workflow> Workflow { get; set; }
     }
 }
