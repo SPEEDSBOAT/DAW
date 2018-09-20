@@ -1,0 +1,317 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DAWModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DAWEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Actions" EntityType="DAWModel.Actions" />
+    <EntitySet Name="Department" EntityType="DAWModel.Department" />
+    <EntitySet Name="Document" EntityType="DAWModel.Document" />
+    <EntitySet Name="DocumentStatus" EntityType="DAWModel.DocumentStatus" />
+    <EntitySet Name="DocumentType" EntityType="DAWModel.DocumentType" />
+    <EntitySet Name="Log" EntityType="DAWModel.Log" />
+    <EntitySet Name="User" EntityType="DAWModel.User" />
+    <EntitySet Name="Workflow" EntityType="DAWModel.Workflow" />
+    <EntitySet Name="WorkflowGroup" EntityType="DAWModel.WorkflowGroup" />
+    <AssociationSet Name="FK_User_Department" Association="DAWModel.FK_User_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Document_DocumentStatus" Association="DAWModel.FK_Document_DocumentStatus">
+      <End Role="DocumentStatus" EntitySet="DocumentStatus" />
+      <End Role="Document" EntitySet="Document" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Document_DocumentType" Association="DAWModel.FK_Document_DocumentType">
+      <End Role="DocumentType" EntitySet="DocumentType" />
+      <End Role="Document" EntitySet="Document" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Document_User" Association="DAWModel.FK_Document_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Document" EntitySet="Document" />
+    </AssociationSet>
+    <AssociationSet Name="FK_DocumentType_WorkflowGroup" Association="DAWModel.FK_DocumentType_WorkflowGroup">
+      <End Role="WorkflowGroup" EntitySet="WorkflowGroup" />
+      <End Role="DocumentType" EntitySet="DocumentType" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Log_User" Association="DAWModel.FK_Log_User">
+      <End Role="User" EntitySet="User" />
+      <End Role="Log" EntitySet="Log" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Log_Actions" Association="DAWModel.FK_Log_Actions">
+      <End Role="Actions" EntitySet="Actions" />
+      <End Role="Log" EntitySet="Log" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Workflow_Department" Association="DAWModel.FK_Workflow_Department">
+      <End Role="Department" EntitySet="Department" />
+      <End Role="Workflow" EntitySet="Workflow" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Workflow_WorkflowGroup" Association="DAWModel.FK_Workflow_WorkflowGroup">
+      <End Role="WorkflowGroup" EntitySet="WorkflowGroup" />
+      <End Role="Workflow" EntitySet="Workflow" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Workflow_Actions" Association="DAWModel.FK_Workflow_Actions">
+      <End Role="Actions" EntitySet="Actions" />
+      <End Role="Workflow" EntitySet="Workflow" />
+    </AssociationSet>
+    <EntitySet Name="ViewUserDpm" EntityType="DAWModel.ViewUserDpm" />
+    <EntitySet Name="ViewDocTypeWorkGroup" EntityType="DAWModel.ViewDocTypeWorkGroup" />
+  </EntityContainer>
+  <EntityType Name="Actions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameTH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NameEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Log" Relationship="DAWModel.FK_Log_Actions" FromRole="Actions" ToRole="Log" />
+    <NavigationProperty Name="Workflow" Relationship="DAWModel.FK_Workflow_Actions" FromRole="Actions" ToRole="Workflow" />
+  </EntityType>
+  <EntityType Name="Department">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameTH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NameEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="User" Relationship="DAWModel.FK_User_Department" FromRole="Department" ToRole="User" />
+    <NavigationProperty Name="Workflow" Relationship="DAWModel.FK_Workflow_Department" FromRole="Department" ToRole="Workflow" />
+  </EntityType>
+  <EntityType Name="Document">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DocumentTypeId" Type="Int32" />
+    <Property Name="DocumentStatusId" Type="Int32" />
+    <Property Name="NextActionUserId" Type="Int32" />
+    <Property Name="DateCreated" Type="DateTime" Precision="3" />
+    <Property Name="OwnerUserId" Type="Int32" />
+    <Property Name="SEQ" Type="Int32" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DocumentStatus" Relationship="DAWModel.FK_Document_DocumentStatus" FromRole="Document" ToRole="DocumentStatus" />
+    <NavigationProperty Name="DocumentType" Relationship="DAWModel.FK_Document_DocumentType" FromRole="Document" ToRole="DocumentType" />
+    <NavigationProperty Name="User" Relationship="DAWModel.FK_Document_User" FromRole="Document" ToRole="User" />
+  </EntityType>
+  <EntityType Name="DocumentStatus">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameTH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NameEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Document" Relationship="DAWModel.FK_Document_DocumentStatus" FromRole="DocumentStatus" ToRole="Document" />
+  </EntityType>
+  <EntityType Name="DocumentType">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameTH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NameEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="WorkflowGroupId" Type="Int32" />
+    <NavigationProperty Name="Document" Relationship="DAWModel.FK_Document_DocumentType" FromRole="DocumentType" ToRole="Document" />
+    <NavigationProperty Name="WorkflowGroup" Relationship="DAWModel.FK_DocumentType_WorkflowGroup" FromRole="DocumentType" ToRole="WorkflowGroup" />
+  </EntityType>
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ActionUserId" Type="Int32" />
+    <Property Name="ActionId" Type="Int32" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="DocumentId" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="User" Relationship="DAWModel.FK_Log_User" FromRole="Log" ToRole="User" />
+    <NavigationProperty Name="Actions" Relationship="DAWModel.FK_Log_Actions" FromRole="Log" ToRole="Actions" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="DepartmentId" Type="Int32" />
+    <Property Name="NameTH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastNameTH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NameEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastNameEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsLeader" Type="Boolean" />
+    <Property Name="IsActive" Type="Boolean" />
+    <NavigationProperty Name="Department" Relationship="DAWModel.FK_User_Department" FromRole="User" ToRole="Department" />
+    <NavigationProperty Name="Document" Relationship="DAWModel.FK_Document_User" FromRole="User" ToRole="Document" />
+    <NavigationProperty Name="Log" Relationship="DAWModel.FK_Log_User" FromRole="User" ToRole="Log" />
+  </EntityType>
+  <EntityType Name="Workflow">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="WorkflowGroupId" Type="Int32" />
+    <Property Name="DepartmentId" Type="Int32" />
+    <Property Name="SEQ" Type="Int32" />
+    <Property Name="StatusBefoerId" Type="Int32" />
+    <Property Name="StatusAfterId" Type="Int32" />
+    <Property Name="ActionId" Type="Int32" />
+    <NavigationProperty Name="Department" Relationship="DAWModel.FK_Workflow_Department" FromRole="Workflow" ToRole="Department" />
+    <NavigationProperty Name="WorkflowGroup" Relationship="DAWModel.FK_Workflow_WorkflowGroup" FromRole="Workflow" ToRole="WorkflowGroup" />
+    <NavigationProperty Name="Actions" Relationship="DAWModel.FK_Workflow_Actions" FromRole="Workflow" ToRole="Actions" />
+  </EntityType>
+  <EntityType Name="WorkflowGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameTH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NameEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="DocumentType" Relationship="DAWModel.FK_DocumentType_WorkflowGroup" FromRole="WorkflowGroup" ToRole="DocumentType" />
+    <NavigationProperty Name="Workflow" Relationship="DAWModel.FK_Workflow_WorkflowGroup" FromRole="WorkflowGroup" ToRole="Workflow" />
+  </EntityType>
+  <Association Name="FK_User_Department">
+    <End Type="DAWModel.Department" Role="Department" Multiplicity="0..1" />
+    <End Type="DAWModel.User" Role="User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Document_DocumentStatus">
+    <End Type="DAWModel.DocumentStatus" Role="DocumentStatus" Multiplicity="0..1" />
+    <End Type="DAWModel.Document" Role="Document" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentStatus">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Document">
+        <PropertyRef Name="DocumentStatusId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Document_DocumentType">
+    <End Type="DAWModel.DocumentType" Role="DocumentType" Multiplicity="0..1" />
+    <End Type="DAWModel.Document" Role="Document" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="DocumentType">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Document">
+        <PropertyRef Name="DocumentTypeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Document_User">
+    <End Type="DAWModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="DAWModel.Document" Role="Document" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Document">
+        <PropertyRef Name="NextActionUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_DocumentType_WorkflowGroup">
+    <End Type="DAWModel.WorkflowGroup" Role="WorkflowGroup" Multiplicity="0..1" />
+    <End Type="DAWModel.DocumentType" Role="DocumentType" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkflowGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="DocumentType">
+        <PropertyRef Name="WorkflowGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Log_User">
+    <End Type="DAWModel.User" Role="User" Multiplicity="0..1" />
+    <End Type="DAWModel.Log" Role="Log" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Log">
+        <PropertyRef Name="ActionUserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Log_Actions">
+    <End Type="DAWModel.Actions" Role="Actions" Multiplicity="0..1" />
+    <End Type="DAWModel.Log" Role="Log" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Log">
+        <PropertyRef Name="ActionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Workflow_Department">
+    <End Type="DAWModel.Department" Role="Department" Multiplicity="0..1" />
+    <End Type="DAWModel.Workflow" Role="Workflow" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Department">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Workflow">
+        <PropertyRef Name="DepartmentId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Workflow_WorkflowGroup">
+    <End Type="DAWModel.WorkflowGroup" Role="WorkflowGroup" Multiplicity="0..1" />
+    <End Type="DAWModel.Workflow" Role="Workflow" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="WorkflowGroup">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Workflow">
+        <PropertyRef Name="WorkflowGroupId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Workflow_Actions">
+    <End Type="DAWModel.Actions" Role="Actions" Multiplicity="0..1" />
+    <End Type="DAWModel.Workflow" Role="Workflow" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Actions">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Workflow">
+        <PropertyRef Name="ActionId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="ViewUserDpm">
+    <Key>
+      <PropertyRef Name="Id" />
+      <PropertyRef Name="Id_Dpm" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="DepartmentId" Type="Int32" />
+    <Property Name="NameTH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastNameTH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NameEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="LastNameEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsLeader" Type="Boolean" />
+    <Property Name="IsActive" Type="Boolean" />
+    <Property Name="Id_Dpm" Type="Int32" Nullable="false" />
+    <Property Name="NameTH_Dpm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NameEN_Dpm" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ViewDocTypeWorkGroup">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" />
+    <Property Name="NameTH" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NameEN" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="WorkflowGroupId" Type="Int32" />
+    <Property Name="NameTH_wfg" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="NameEN_wfg" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+</Schema>
